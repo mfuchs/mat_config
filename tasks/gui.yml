@@ -22,7 +22,8 @@
   service: "name=gdm enabled=yes"
 
 - name: Ensure icons are shown in menus.
-  command: "gsettings set org.gnome.settings-daemon.plugins.xsettings overrides \"{'Gtk/ButtonImages': <1>, 'Gtk/MenuImages': <1>}\""
-  register: gnome_icons
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/xsettings/overrides"
+    value: "{'Gtk/ButtonImages': <1>, 'Gtk/MenuImages': <1>}"
   become: yes
   become_user: "{{ user_name }}"
