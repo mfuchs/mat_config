@@ -1,0 +1,83 @@
+---
+- name: Deactivate beeping
+  lineinfile:
+    path: /etc/modprobe.d/nobeep.conf
+    create: yes
+    line: "blacklist pcspkr"
+
+- name: Enable german locale
+  lineinfile:
+    path: /etc/locale.gen
+    regexp: "^#de_DE.UTF-8"
+    line: "de_DE.UTF-8 UTF-8"
+  notify: "locale-gen"
+
+- name: Enable US locale
+  lineinfile:
+    path: /etc/locale.gen
+    regexp: "^#en_US.UTF-8"
+    line: "en_US.UTF-8 UTF-8"
+  notify: "locale-gen"
+
+- meta: flush_handlers
+
+- name: Configure locale
+  ini_file:
+    path: /etc/locale.conf
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    section: ""
+    no_extra_spaces: yes
+  with_items:
+    - { option: "LANG", value: "en_US.UTF-8" }
+    - { option: "LC_NUMERIC", value: "de_DE.UTF-8" }
+    - { option: "LC_TIME", value: "de_DE.UTF-8" }
+    - { option: "LC_MONETARY", value: "de_DE.UTF-8" }
+    - { option: "LC_PAPER", value: "de_DE.UTF-8" }
+    - { option: "LC_MEASUREMENT", value: "de_DE.UTF-8" }
+
+- name: Configure the console keylayout
+  ini_file:
+    path: /etc/vconsole.conf
+    option: "KEYMAP"
+    value: "de-latin1"
+    section: ""
+    no_extra_spaces: yes
+
+- name: Install sound related packages, this includes lib32 to support steam, wine etc.
+  package: "name={{ item }} state=present"
+  with_items:
+    - pulseaudio
+    - pulseaudio-alsa
+    - lib32-libpulse
+    - lib32-alsa-plugins
+
+- name: Turn beeping, i.e. pc speaker, off in terminal
+  lineinfile:
+    path: /etc/inputrc
+    regexp: "#set bell-style none"
+    line: "set bell-style none"
+
+- name: Install some maintenance tools.
+  package: "name={{ item }} state=present"
+  with_items:
+    - ack
+    - dialog
+    - exfat-utils
+    - fd
+    - gparted
+    - htop
+    - lsof
+    - networkmanager
+    - networkmanager-openconnect
+    - networkmanager-openvpn
+    - networkmanager-pptp
+    - networkmanager-vpnc
+    - networkmanager-strongswan
+    - openssh
+    - ripgrep
+    - strace
+    - wget
+ 
+- name: Activate netowrk manager
+  service: "name=NetworkManager enabled=yes"

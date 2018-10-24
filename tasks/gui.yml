@@ -1,0 +1,28 @@
+---
+- name: Install xorg
+  package: "name={{ item }} state=present"
+  with_items:
+    - xorg-server
+    - xf86-input-libinput
+    - xorg-xinput
+
+- name: Ensure synaptics is not installed, since it can cause issues with the touchpad
+  package: "name=xf86-input-synaptics state=absent"
+
+- name: Install gnome + gnome tools.
+  package: "name={{ item }} state=present"
+  with_items:
+    - gdm
+    - gnome
+    - gnome-extra
+    - gnome-shell
+    - gnome-tweak-tool
+
+- name: Enable gdbm service
+  service: "name=gdm enabled=yes"
+
+- name: Ensure icons are shown in menus.
+  command: "gsettings set org.gnome.settings-daemon.plugins.xsettings overrides \"{'Gtk/ButtonImages': <1>, 'Gtk/MenuImages': <1>}\""
+  register: gnome_icons
+  become: yes
+  become_user: "{{ user_name }}"

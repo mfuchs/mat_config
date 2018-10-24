@@ -1,0 +1,16 @@
+---
+- name: Add main user.
+  user:
+    name: "{{ user_name }}"
+    shell: "{{ user_shell }}"
+    home: "{{ user_home }}"
+    uid: "{{ user_id }}"
+    group: "users"
+    append: yes
+
+- name: Ensure that the default user has sudo-rights
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: "{{ user_name }}   ALL=(ALL) ALL"
+    validate: "/usr/sbin/visudo -cf %s"

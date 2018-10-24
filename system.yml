@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  become_user: sudo
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Activate multilibs.
+      ini_file:
+        dest: /etc/pacman.conf
+        section: multilib
+        option: Include
+        value: /etc/pacman.d/mirrorlist
+      
+    - name: Update repository.
+      pacman: update_cache=yes
+
+  handlers:
+    - name: locale-gen
+      command: locale-gen
+
+  tasks:
+    - name: Sudo
+      package: "name=sudo state=present"
+
+    - include: tasks/users.yml
+    - include: tasks/basics.yml
+    - include: tasks/gui.yml
+    - include: tasks/productivity.yml
+    - include: tasks/programming.yml
+
+# TODO clang, gnome, show gnome-icons, hochstell-tasten config
