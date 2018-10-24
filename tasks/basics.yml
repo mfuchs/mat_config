@@ -47,10 +47,10 @@
     - lib32-alsa-plugins
 
 - name: Turn beeping, i.e. pc speaker, off in terminal
-  lineinfile:
+  replace:
     path: /etc/inputrc
     regexp: "#set bell-style none"
-    line: "set bell-style none"
+    replace: "set bell-style none"
 
 - name: Install some maintenance tools.
   package: "name={{ item }} state=present"
