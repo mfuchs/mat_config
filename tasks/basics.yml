@@ -5,21 +5,15 @@
     create: yes
     line: "blacklist pcspkr"
 
-- name: Enable german locale
-  lineinfile:
+- name: Enable locales and generate them
+  replace:
     path: /etc/locale.gen
-    regexp: "^#de_DE.UTF-8"
-    line: "de_DE.UTF-8 UTF-8"
+    regexp: "^#{{ item }}$"
+    replace: "{{ item }}"
   notify: "locale-gen"
-
-- name: Enable US locale
-  lineinfile:
-    path: /etc/locale.gen
-    regexp: "^#en_US.UTF-8"
-    line: "en_US.UTF-8 UTF-8"
-  notify: "locale-gen"
-
-- meta: flush_handlers
+  loop:
+    - "de_DE.UTF-8 UTF-8"
+    - "en_US.UTF-8 UTF-8"
 
 - name: Configure locale
   ini_file:
