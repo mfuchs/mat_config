@@ -1,0 +1,6 @@
+---
+- name: Update repository
+  pacman: update_cache=yes
+
+- name: locale-gen
+  command: locale-gen

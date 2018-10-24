@@ -1,0 +1,12 @@
+- name: Activate multilibs.
+  ini_file:
+    dest: /etc/pacman.conf
+    section: multilib
+    option: Include
+    value: /etc/pacman.d/mirrorlist
+  notify: "Update repository"
+
+- meta: flush_handlers
+
+- name: Install sudo
+  package: "name=sudo state=present"

@@ -3,4 +3,3 @@ user_home: /home/matthias
 user_id: 1000
 user_shell: /bin/bash
 user_groups: users
-
