@@ -1,7 +1,7 @@
 ---
 - name: Install build dependencies and build tools.
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - base-devel
     - gdb
     - clang
@@ -12,21 +12,21 @@
 
 - name: Install SCMs and dependencies for their guis.
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - git
     - subversion
     - tk
 
 - name: Install Qt
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - qt5-base
     - qt5-doc
     - qt5-examples
 
 - name: Install Python
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - jupyter_console
     - python
     - python-pip
@@ -35,25 +35,25 @@
 
 - name: Install Rust
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - rust
     - rust-racer
     - rust-docs
 
 - name: Install JVM Languages and Environment
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - apache-ant clojure gradle groovy kotlin maven sbt scala
 
 - name: Install IDEs
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - intellij-idea-community-edition
     - qtcreator
 
 - name: Install Container and Virtualization
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - docker
     - docker-compose
     - libvirt

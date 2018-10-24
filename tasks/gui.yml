@@ -1,7 +1,7 @@
 ---
 - name: Install xorg
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - xorg-server
     - xf86-input-libinput
     - xorg-xinput
@@ -11,7 +11,7 @@
 
 - name: Install gnome + gnome tools.
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - gdm
     - gnome
     - gnome-extra

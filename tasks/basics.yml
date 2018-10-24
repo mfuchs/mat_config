@@ -28,7 +28,7 @@
     value: "{{ item.value }}"
     section: ""
     no_extra_spaces: yes
-  with_items:
+  loop:
     - { option: "LANG", value: "en_US.UTF-8" }
     - { option: "LC_NUMERIC", value: "de_DE.UTF-8" }
     - { option: "LC_TIME", value: "de_DE.UTF-8" }
@@ -46,7 +46,7 @@
 
 - name: Install sound related packages, this includes lib32 to support steam, wine etc.
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - pulseaudio
     - pulseaudio-alsa
     - lib32-libpulse
@@ -60,7 +60,7 @@
 
 - name: Install some maintenance tools.
   package: "name={{ item }} state=present"
-  with_items:
+  loop:
     - ack
     - dialog
     - exfat-utils
