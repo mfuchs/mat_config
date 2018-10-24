@@ -6,3 +6,17 @@
     - gui
     - programming
     - productivity
+
+  tasks:
+    - name: Install the nvidia drivers
+      package: "name={{ item }} state=present"
+      loop:
+        - nvidia
+        - nvidia-settings
+
+    - name: Ensure that right clicks work on the touchpad
+      dconf:
+        key: "/org/gnome/desktop/peripherals/touchpad/click-method"
+        value: "'areas'"
+      become: yes
+      become_user: "{{ user_name }}"
