@@ -1,63 +1,70 @@
 ---
 - name: Install build dependencies and build tools.
-  package: "name={{ item }} state=present"
-  loop:
-    - base-devel
-    - gdb
-    - clang
-    - clang-tools-extra
-    - cmake
-    - make ninja
-    - valgrind
+  pacman:
+    name:
+      - base-devel
+      - gdb
+      - clang
+      - clang-tools-extra
+      - cmake
+      - make ninja
+      - valgrind
 
 - name: Install SCMs and dependencies for their guis.
-  package: "name={{ item }} state=present"
-  loop:
-    - git
-    - subversion
-    - tk
+  pacman:
+    name:
+      - git
+      - subversion
+      - tk
 
 - name: Install Qt
-  package: "name={{ item }} state=present"
-  loop:
-    - qt5-base
-    - qt5-doc
-    - qt5-examples
+  pacman:
+    name:
+      - qt5-base
+      - qt5-doc
+      - qt5-examples
 
 - name: Install Python
-  package: "name={{ item }} state=present"
-  loop:
-    - jupyter_console
-    - python
-    - python-pip
-    - python2
-    - python2-pip
+  pacman:
+    name:
+      - jupyter_console
+      - python
+      - python-pip
+      - python2
+      - python2-pip
 
 - name: Install Rust
-  package: "name={{ item }} state=present"
-  loop:
-    - rust
-    - rust-racer
-    - rust-docs
+  pacman:
+    name:
+      - rust
+      - rust-racer
+      - rust-docs
 
 - name: Install JVM Languages and Environment
-  package: "name={{ item }} state=present"
-  loop:
-    - apache-ant clojure gradle groovy kotlin maven sbt scala
+  pacman:
+    name:
+      - apache-ant
+      - clojure
+      - gradle
+      - groovy
+      - kotlin
+      - maven
+      - sbt
+      - scala
 
 - name: Install IDEs
-  package: "name={{ item }} state=present"
-  loop:
-    - intellij-idea-community-edition
-    - qtcreator
+  pacman:
+    name:
+      - intellij-idea-community-edition
+      - qtcreator
 
 - name: Install Container and Virtualization
-  package: "name={{ item }} state=present"
-  loop:
-    - docker
-    - docker-compose
-    - libvirt
-    - qemu
+  pacman:
+    name:
+      - docker
+      - docker-compose
+      - libvirt
+      - qemu
 
 - name: Add user to groups so that they can use containers and virtualization
   user:

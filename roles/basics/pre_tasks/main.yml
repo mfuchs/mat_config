@@ -9,4 +9,4 @@
 - meta: flush_handlers
 
 - name: Install sudo
-  package: "name=sudo state=present"
+  pacman: "name=sudo state=present"

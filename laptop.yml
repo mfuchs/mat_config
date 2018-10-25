@@ -9,10 +9,10 @@
 
   tasks:
     - name: Install the nvidia drivers
-      package: "name={{ item }} state=present"
-      loop:
-        - nvidia
-        - nvidia-settings
+      pacman:
+        name:
+          - nvidia
+          - nvidia-settings
 
     - name: Ensure that right clicks work on the touchpad
       dconf:

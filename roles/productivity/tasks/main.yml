@@ -1,6 +1,6 @@
 ---
 - name: Install printer support via cups.
-  package: "name=cups state=present"
+  pacman: "name=cups state=present"
 
 #- name: Enable and start cups.
 #  service:
@@ -9,31 +9,31 @@
 #    enabled: yes
 
 - name: Install web browsers and mail clients.
-  package: "name={{ item }} state=present"
-  loop:
-    - chromium
-    - firefox
-    - firefox-i18n-de
-    - firefox-i18n-en-us
-    - thunderbird
-    - thunderbird-i18n-de
-    - thunderbird-i18n-en-us
+  pacman:
+    name:
+      - chromium
+      - firefox
+      - firefox-i18n-de
+      - firefox-i18n-en-us
+      - thunderbird
+      - thunderbird-i18n-de
+      - thunderbird-i18n-en-us
 
 - name: Install office applications and dependencies
-  package: "name={{ item }} state=present"
-  loop:
-    - hunspell
-    - hunspell-de
-    - hunspell-en_GB
-    - hunspell-en_US
-    - hyphen
-    - hyphen-de
-    - hyphen-en
-    - libmythes
-    - mythes-de
-    - mythes-en
-    - libreoffice-still
-    - libreoffice-still-de
+  pacman:
+    name:
+      - hunspell
+      - hunspell-de
+      - hunspell-en_GB
+      - hunspell-en_US
+      - hyphen
+      - hyphen-de
+      - hyphen-en
+      - libmythes
+      - mythes-de
+      - mythes-en
+      - libreoffice-still
+      - libreoffice-still-de
 
 - name: Turn the annoying LibreOffice bootup-logo off.
   ini_file:
@@ -43,10 +43,10 @@
     value: 0
 
 - name: Other helper-tools
-  package: "name={{ item }} state=present"
-  loop:
-    - gimp
-    - gimp-help-en
+  pacman:
+    name:
+      - gimp
+      - gimp-help-en
 
 # TODO broken!
 #- name: Insall useful applications via flatpak, avoid AUR

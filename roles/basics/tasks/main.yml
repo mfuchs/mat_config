@@ -39,12 +39,12 @@
     no_extra_spaces: yes
 
 - name: Install sound related packages, this includes lib32 to support steam, wine etc.
-  package: "name={{ item }} state=present"
-  loop:
-    - pulseaudio
-    - pulseaudio-alsa
-    - lib32-libpulse
-    - lib32-alsa-plugins
+  pacman:
+    name:
+      - pulseaudio
+      - pulseaudio-alsa
+      - lib32-libpulse
+      - lib32-alsa-plugins
 
 - name: Turn beeping, i.e. pc speaker, off in terminal
   replace:
@@ -53,26 +53,26 @@
     replace: "set bell-style none"
 
 - name: Install some maintenance tools.
-  package: "name={{ item }} state=present"
-  loop:
-    - ack
-    - dialog
-    - exfat-utils
-    - fd
-    - gparted
-    - htop
-    - lsof
-    - networkmanager
-    - networkmanager-openconnect
-    - networkmanager-openvpn
-    - networkmanager-pptp
-    - networkmanager-vpnc
-    - networkmanager-strongswan
-    - openssh
-    - python-psutil
-    - ripgrep
-    - strace
-    - wget
+  pacman:
+    name:
+      - ack
+      - dialog
+      - exfat-utils
+      - fd
+      - gparted
+      - htop
+      - lsof
+      - networkmanager
+      - networkmanager-openconnect
+      - networkmanager-openvpn
+      - networkmanager-pptp
+      - networkmanager-vpnc
+      - networkmanager-strongswan
+      - openssh
+      - python-psutil
+      - ripgrep
+      - strace
+      - wget
  
 - name: Activate netowrk manager
   service: "name=NetworkManager enabled=yes"

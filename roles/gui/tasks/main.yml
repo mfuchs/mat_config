@@ -1,22 +1,22 @@
 ---
 - name: Install xorg
-  package: "name={{ item }} state=present"
-  loop:
-    - xorg-server
-    - xf86-input-libinput
-    - xorg-xinput
+  pacman:
+    name:
+      - xorg-server
+      - xf86-input-libinput
+      - xorg-xinput
 
 - name: Ensure synaptics is not installed, since it can cause issues with the touchpad
-  package: "name=xf86-input-synaptics state=absent"
+  pacman: "name=xf86-input-synaptics state=absent"
 
 - name: Install gnome + gnome tools.
-  package: "name={{ item }} state=present"
-  loop:
-    - gdm
-    - gnome
-    - gnome-extra
-    - gnome-shell
-    - gnome-tweak-tool
+  pacman:
+   name:
+      - gdm
+      - gnome
+      - gnome-extra
+      - gnome-shell
+      - gnome-tweak-tool
 
 - name: Enable gdbm service
   service: "name=gdm enabled=yes"
