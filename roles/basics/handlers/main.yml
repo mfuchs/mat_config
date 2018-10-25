@@ -4,3 +4,6 @@
 
 - name: locale-gen
   command: locale-gen
+
+- name: hwclock
+  command: hwclock --systohc

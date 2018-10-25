@@ -1,4 +1,12 @@
 ---
+- name: Set the timezone
+  file:
+    src: /usr/share/zoneinfo/Europe/Vienna
+    dest: /etc/localtime
+    state: link
+    force: yes
+  notify: hwclock
+
 - name: Create the hostname file
   lineinfile:
     path: /etc/hostname
