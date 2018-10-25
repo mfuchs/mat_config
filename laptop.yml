@@ -2,6 +2,9 @@
 - hosts: localhost
   become_user: sudo
 
+  vars:
+    - hostname: MAT_LAPTOP
+
   roles:
     - gui
     - programming

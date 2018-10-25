@@ -1,4 +1,17 @@
 ---
+- name: Create the hostname file
+  lineinfile:
+    path: /etc/hostname
+    create: yes
+    line: "{{ hostname }}"
+  when: hostname != ""
+
+- name: Adapt the hosts file
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.0.1\t{{ hostname }}.localdomain\t{{ hostname }}"
+  when: hostname != ""
+
 - name: Deactivate beeping
   lineinfile:
     path: /etc/modprobe.d/nobeep.conf
