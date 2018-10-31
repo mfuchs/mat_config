@@ -22,6 +22,9 @@
 - name: Install office applications and dependencies
   pacman:
     name:
+      - aspell
+      - aspell-de
+      - aspell-en
       - hunspell
       - hunspell-de
       - hunspell-en_GB
