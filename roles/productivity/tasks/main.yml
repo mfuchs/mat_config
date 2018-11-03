@@ -50,6 +50,8 @@
     name:
       - gimp
       - gimp-help-en
+      - imagemagick
+      - sqlitebrowser
 
 # TODO broken!
 #- name: Insall useful applications via flatpak, avoid AUR
