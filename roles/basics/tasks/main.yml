@@ -80,6 +80,7 @@
       - dialog
       - exfat-utils
       - fd
+      - fish
       - gparted
       - htop
       - lsof
@@ -94,6 +95,6 @@
       - ripgrep
       - strace
       - wget
- 
+
 - name: Activate netowrk manager
   service: "name=NetworkManager enabled=yes"
