@@ -41,3 +41,10 @@
     value: "-2"
   become: yes
   become_user: "{{ user_name }}"
+
+- name: Deactivate sound alerts
+  dconf:
+    key: "/org/gnome/desktop/sound/event-sounds"
+    value: "false"
+  become: yes
+  become_user: "{{ user_name }}"
