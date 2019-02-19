@@ -37,6 +37,7 @@
       - mythes-en
       - libreoffice-still
       - libreoffice-still-de
+      - libreoffice-still-en-gb
 
 - name: Turn the annoying LibreOffice bootup-logo off.
   ini_file:
