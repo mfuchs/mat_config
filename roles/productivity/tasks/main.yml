@@ -54,9 +54,8 @@
       - imagemagick
       - sqlitebrowser
 
-# TODO broken!
-#- name: Insall useful applications via flatpak, avoid AUR
-#  flatpak: "name={{ item }} state=present"
-#  loop:
-#    - com.slack.Slack.flatpakref
-#    - com.spotify.Client.flatpakref
+- name: Insall useful applications via flatpak, avoid AUR
+  flatpak: "name={{ item }} state=present"
+  loop:
+    - com.slack.Slack
+    - com.spotify.Client
